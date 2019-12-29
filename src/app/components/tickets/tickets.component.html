@@ -1,0 +1,22 @@
+<h2>Tickets</h2>
+
+<a routerLink="/tickets/0">New ticket</a>
+
+<form>
+    <label>
+        <input (input)="updateFilteredTickets($event)">
+        Filter tickets
+    </label>
+</form>
+
+<ul>
+    <li *ngFor="let t of filteredTickets|async">
+        <a routerLink="/tickets/{{t.id}}">
+            <div>
+                Ticket: {{t.id}}, {{t.description}}, completed: {{t.completed}}
+            </div>
+        </a>
+    </li>
+</ul>
+<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="error !== null">{{error.desc}}</div>

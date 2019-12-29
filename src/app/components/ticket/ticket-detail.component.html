@@ -1,0 +1,36 @@
+<div class="ticket-detail" *ngIf="ticket">
+    <div>
+        <a routerLink="/tickets">To all tickets</a>
+    </div>
+    <div>
+        <label>
+            Assigned to:
+            <select class="users-list" id="user-select" (change)="updateAssignee($event)">
+                <option value="">--Please choose an option--</option>
+                <option *ngFor="let user of users" value="{{user.id}}"
+                        [attr.selected]="ticket.assigneeId === user.id ? '' : null"
+                >{{user.name}}</option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <form>
+            <label>
+                Description:
+                <input [attr.disabled]="ticket.id === 0 ? null : ''"
+                       value="{{ticket.description}}"
+                       (input)="updateDescription($event)">
+            </label>
+            <label>
+                Completed:
+                <input class="completed-checkbox" type="checkbox" (change)="updateCompeted($event)" [attr.checked]="ticket.completed ? '' : null"/>
+            </label>
+        </form>
+    </div>
+    <div>
+        <button class="btn-save" [attr.disabled]="isSaving ? '' : null" (click)="save()">Save</button>
+        <span class="saving" *ngIf="isSaving">Saving...</span>
+    </div>
+</div>
+<div class="loading" *ngIf="isLoading">Loading...</div>
+<div *ngIf="error !== null">{{error.desc}}</div>
