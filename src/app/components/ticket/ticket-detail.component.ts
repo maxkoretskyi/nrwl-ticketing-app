@@ -33,7 +33,9 @@ export class TicketDetailComponent implements OnInit {
         this.route.paramMap.pipe(
             switchMap((params: ParamMap) => {
                 const id = Number(params.get('id'));
-                return (id > 0) ? this.backend.ticket(id) : of({id});
+                return (id > 0) ?
+                    this.backend.ticket(id) :
+                    of({id, completed: false, description: '', assigneeId: null});
             }),
             tap((ticket: Ticket) => {
                 this.ticket = {...ticket};
