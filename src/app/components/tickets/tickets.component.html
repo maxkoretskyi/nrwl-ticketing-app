@@ -9,10 +9,10 @@
     </label>
 </form>
 
-<ul>
-    <li *ngFor="let t of filteredTickets|async">
+<ul class="tickets-list">
+    <li class="ticket-container" *ngFor="let t of filteredTickets|async">
         <a routerLink="/tickets/{{t.id}}">
-            <div>
+            <div class="ticket-details">
                 Ticket: {{t.id}}, {{t.description}}, completed: {{t.completed}}
             </div>
         </a>

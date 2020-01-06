@@ -75,13 +75,13 @@ describe('TicketDetailComponent (integration test)', () => {
             ],
             imports: [RouterTestingModule],
             schemas: [NO_ERRORS_SCHEMA]
-        });
+        })
+            .compileComponents()
+            .then(() => {
+                fixture = TestBed.createComponent(TicketDetailComponent);
+                component = fixture.componentInstance;
+            });
     }));
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(TicketDetailComponent);
-        component = fixture.componentInstance;
-    });
 
     it('should mark a ticket complete', fakeAsync(inject([BackendService, ActivatedRoute],
         (backend: BackendServiceStub, activatedRoute: ActivatedRouteStub) => {
